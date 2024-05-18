@@ -122,7 +122,7 @@ def aggregate_compartment(cell_table, temp_dir, bins, output_path, calc_strength
     total_scores = []
     for cell_id, cell_url in cell_table.items():
         comp_path = f'{temp_dir}/{cell_id}.comp.npz'
-        npz_data = np.load(comp_path)
+        npz_data = np.load(comp_path, allow_pickle=True)
         total_comp.append(npz_data['arr_0'])
         if calc_strength:
             total_scores.append(npz_data['arr_1'])
