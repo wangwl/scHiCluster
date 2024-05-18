@@ -490,6 +490,7 @@ def generate_scool_register_subparser(subparser):
 
 def prepare_imputation_register_subparser(subparser):
     parser = subparser.add_parser('prepare-impute',
+                                  aliases=['imputation'],
                                   formatter_class=argparse.ArgumentDefaultsHelpFormatter,
                                   help="")
 
@@ -558,9 +559,10 @@ def call_domain_register_subparser(subparser):
                         help='Matrix resolution')
     parser.add_argument('--window_size', type=int, required=False, default=10,
                         help='The size in base pairs of sliding window for calculating insulation score')
+    parser.add_argument('--save_count', dest='save_count', action='store_true', required=False,
+                        help='to save intra and inter separately')
     parser.add_argument('--cpu', type=int, required=False, default=10,
                         help='Number of CPUs to use')
-
 
 def call_compartment_register_subparser(subparser):
     parser = subparser.add_parser('compartment',
@@ -873,7 +875,7 @@ def main():
         from .draft.comp_concatcell_chr import comp_concatcell_chr as func
     elif cur_command in ['generate-scool', 'scool']:
         from .cool import generate_scool as func
-    elif cur_command in ['prepare-impute']:
+    elif cur_command in ['prepare-impute', 'imputation']:
         from .impute import prepare_impute as func
     elif cur_command in ['domain']:
         from .domain import multiple_call_domain_and_insulation as func
