@@ -96,7 +96,7 @@ def single_cell_compartment(cell_url, cpg_profile, calc_strength, output_prefix,
                 matrix = csr_matrix((n_bins, n_bins))
             else:
                 matrix = data.loc[chrfilter]
-                matrix.loc[[pos1, pos2]] = (matrix.loc[[pos1, pos2]] - 1) // resolution
+                matrix.iloc[:,[pos1, pos2]] = (matrix.iloc[:,[pos1, pos2]] - 1) // resolution
                 matrix = matrix.groupby(by=[pos1, pos2])[chrom1].count().reset_index()
                 matrix = csr_matrix((matrix[chrom1].astype(np.int32), (matrix[pos1], matrix[pos2])), (n_bins, n_bins))
                 matrix = matrix + matrix.T
